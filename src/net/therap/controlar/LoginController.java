@@ -1,0 +1,53 @@
+package net.therap.controlar;
+
+import net.therap.domain.User;
+import net.therap.sevice.UserService;
+import net.therap.sevice.UserServiceImpl;
+
+import javax.servlet.RequestDispatcher;
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+
+/**
+ * Created with IntelliJ IDEA.
+ * User: sujan.sarkar
+ * Date: 5/20/14
+ * Time: 4:45 PM
+ * To change this template use File | Settings | File Templates.
+ */
+@WebServlet("/login.html")
+public class LoginController extends HttpServlet {
+    private UserService userService;
+
+    public LoginController() {
+        userService = new UserServiceImpl();
+    }
+
+    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+        requestDispatcher.forward(request, response);
+    }
+
+    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+        User user = new User();
+        user.setUserName(request.getParameter("userName"));
+        user.setPassword(request.getParameter("password"));
+        System.out.println(user.getUserName() + " " + user.getPassword());
+        User verifiedUser = userService.verifyUser(user);
+
+        if (verifiedUser != null) {
+            HttpSession httpSession = request.getSession();
+            httpSession.setAttribute("verifiedUser", verifiedUser);
+            response.sendRedirect("/home.html");
+        } else {
+            RequestDispatcher requestDispatcher = request.getRequestDispatcher("/login.jsp");
+            requestDispatcher.forward(request, response);
+        }
+    }
+}
+
