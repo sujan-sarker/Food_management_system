@@ -9,11 +9,15 @@ package net.therap.domain;
  */
 public class DayAndMealItem {
     private int dayId;
+    private String dayName;
     private String breakfastItem;
     private String lunchItem;
 
     public void setDayId(int dayId) {
         this.dayId = dayId;
+    }
+    public void setDayName(String dayName) {
+        this.dayName = dayName;
     }
     public void setBreakfastItem(String breakfastItem) {
         this.breakfastItem = breakfastItem;
@@ -29,5 +33,8 @@ public class DayAndMealItem {
     }
     public String getLunchItem() {
         return this.lunchItem;
+    }
+    public String getDayName() {
+        return this.dayName;
     }
 }

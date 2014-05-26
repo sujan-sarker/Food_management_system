@@ -32,7 +32,7 @@ public class LoginFilter implements Filter {
 
         } else if (session != null && session.getAttribute("verifiedUser") != null && (requestedUri.contains("login") || requestedUri.contains("register"))) {
 
-            ((HttpServletResponse) servletResponse).sendRedirect("/helloWorld/home.html");
+            ((HttpServletResponse) servletResponse).sendRedirect("/home.html");
 
         } else {
 

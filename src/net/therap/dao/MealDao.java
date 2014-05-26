@@ -12,5 +12,7 @@ import java.util.List;
  * To change this template use File | Settings | File Templates.
  */
 public interface MealDao {
+
     public List<DayAndMealItem> getMealList();
+    void updateMeal(DayAndMealItem dayAndMealItem);
 }

@@ -24,6 +24,7 @@ public class UserDaoImpl implements UserDao {
             public User mapRowToObject(ResultSet resultset) throws SQLException {
                 User user = new User();
                 user.setUserId(resultset.getInt("id"));
+                user.setUserType(resultset.getInt("type"));
                 user.setUserName(resultset.getString("name"));
                 user.setPassword(resultset.getString("password"));
                 return user;

@@ -25,10 +25,28 @@ public class MealDaoImpl implements MealDao{
                 dayAndMealItem.setDayId(resultset.getInt("day_id"));
                 dayAndMealItem.setBreakfastItem(resultset.getString("breakfast"));
                 dayAndMealItem.setLunchItem(resultset.getString("lunch"));
+                dayAndMealItem.setDayName(resultset.getString("name"));
                 return dayAndMealItem;
             }
         });
 
         return mealList;
+    }
+
+    public void updateMeal(DayAndMealItem dayAndMealItem) {
+        String mealType;
+        String updatedMenu;
+        int dayId;
+
+        if(dayAndMealItem.getBreakfastItem()==null) {
+            mealType = "lunch";
+            updatedMenu = dayAndMealItem.getLunchItem();
+        } else {
+            mealType ="breakfast";
+            updatedMenu = dayAndMealItem.getBreakfastItem();
+        }
+        dayId = dayAndMealItem.getDayId();
+
+        DatabaseTemplate.executeInsertUpdateQuery("update meal_schedule set "+mealType+"=? where day_id=?",updatedMenu,dayId);
     }
 }

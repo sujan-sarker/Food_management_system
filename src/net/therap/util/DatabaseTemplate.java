@@ -1,9 +1,6 @@
 package net.therap.util;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -39,5 +36,52 @@ public class DatabaseTemplate {
             }
         }
         return listOfE;
+    }
+
+    public static void executeInsertUpdateQuery(String query, Object... parameters) {
+        Connection conToUse = null;
+        PreparedStatement preparedStatement = null;
+        try {
+            conToUse =  DatabaseConnection.getConnection();
+            preparedStatement = conToUse.prepareStatement(query);
+
+            int i = 1;
+            for (Object parameter : parameters) {
+                if (parameter instanceof String) {
+                    preparedStatement.setString(i, (String) parameter);
+                } else if (parameter instanceof Integer) {
+                    preparedStatement.setInt(i, (Integer) parameter);
+                } else if (parameter instanceof Long) {
+                    preparedStatement.setLong(i, (Long) parameter);
+                } else if (parameter instanceof Float) {
+                    preparedStatement.setFloat(i, (Float) parameter);
+                } else if (parameter instanceof Double) {
+                    preparedStatement.setDouble(i, (Double) parameter);
+                } else if (parameter instanceof Date) {
+                    preparedStatement.setDate(i, (Date) parameter);
+                } else if (parameter instanceof Blob) {
+                    preparedStatement.setBlob(i, (Blob) parameter);
+                }
+                i++;
+            }
+            preparedStatement.executeUpdate();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        } finally {
+            try {
+                preparedStatement.close();
+            } catch (SQLException e) {
+                closeConnection(conToUse);
+                throw new RuntimeException(e);
+            }
+        }
+    }
+
+    private static void closeConnection(Connection conToClose) {
+        try {
+            conToClose.close();
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
