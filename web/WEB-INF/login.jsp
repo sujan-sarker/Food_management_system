@@ -10,15 +10,14 @@
 <%@taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="en"/>
-<fmt:setBundle basename="net.therap.props.messages"/>
+<fmt:setBundle basename="messages"/>
 
 <html>
 
 <head>
-    <title><fmt:message key="login.title"/></title>
+    <title>User Login</title>
 
-    <link rel="stylesheet" type="text/css" href="<c:url value="/style.css"/>
-">
+    <link rel="stylesheet" type="text/css" href="<c:url value="/style.css"/>">
 </head>
 
 <body>
@@ -30,12 +29,12 @@
         <fieldset>
             <table aling="center">
                 <tr>
-                    <td><fmt:message key="login.userName"/></td>
+                    <td>username : </td>
                     <td><input type="text" name="userName"/></td>
                 </tr>
 
                 <tr>
-                    <td><fmt:message key="login.password"/></td>
+                    <td>password : </td>
                     <td><input type="password" name="password"/></td>
                 </tr>
 

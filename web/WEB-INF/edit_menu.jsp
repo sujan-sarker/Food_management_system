@@ -2,20 +2,20 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <fmt:setLocale value="en"/>
-<fmt:setBundle basename="net.therap.props.messages"/>
+<fmt:setBundle basename="messages"/>
 <html>
 
 <head>
 
-    <title><fmt:message key="home.title"/></title>
-    <link rel="stylesheet" type="text/css" href="../style.css">
+    <title>Food Management System</title>
+    <link rel="stylesheet" type="text/css" href="<c:url value="/style.css"/>">
 
 </head>
 
 <body>
 
 <div id ="table">
-    <h1 style="text-align:center;"><fmt:message key="home.title"/></h1>
+    <h1 style="text-align:center;">Food Management System</h1>
     <table align="right">
         <tr>
             <c:choose>
@@ -54,7 +54,7 @@
                 <td>
                     <c:choose>
                         <c:when test="${(requestScope.mealType)=='breakfast' and (requestScope.dayId)==meal.getDayId()}">
-                            <form action="/save.html" method="post">
+                            <form action="save.html" method="post">
                                 <input type="text" name="newMeal">
                                 <input type="submit" value="save">
                                 <input type="hidden" name="dayId" value="<c:out value='${requestScope.dayId}'/>">
@@ -79,7 +79,7 @@
                 <td>
                     <c:choose>
                         <c:when test="${(requestScope.mealType)=='lunch' and (requestScope.dayId)==meal.getDayId()}">
-                            <form action="\save.html" method="post">
+                            <form action="save.html" method="post">
                                 <input type="text" name="newMeal">
                                 <input type="submit" value="save">
                                 <input type="hidden" name="dayId" value="<c:out value='${requestScope.dayId}'/>">

@@ -8,7 +8,7 @@
 
 <head>
 
-    <title><fmt:message key="home.title"/></title>
+    <title>Food Management System</title>
     <link rel="stylesheet" type="text/css" href="../style.css">
 
 </head>
@@ -17,7 +17,7 @@
 
 <div id="table">
 
-    <h1 style="text-align:center;"><fmt:message key="home.title"/></h1>
+    <h1 style="text-align:center;">Food Management System</h1>
 
 
     <h1 style="text-align:center;">Meal List of Today</h1>
